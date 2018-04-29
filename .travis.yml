@@ -12,6 +12,7 @@ before_deploy:
   - docker cp ws2:/app/build/install $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2
   - cd $TRAVIS_BUILD_DIR/ws2install
   - tar zcvf smblevelworkshop2.tar.gz --owner=0 --group=0 smblevelworkshop2
+  - cd $TRAVIS_BUILD_DIR
 deploy:
   skip-cleanup: true
   provider: bintray
