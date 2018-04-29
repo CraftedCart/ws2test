@@ -18,8 +18,8 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export CC=clang; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export CXX=clang++; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export CMAKE_PREFIX_PATH="/usr/local/opt/qt/lib/cmake"; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update || true; fi #OR with true as the python update will yell about the linking
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew upgrade; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew upgrade || true; fi #OR with true as the python update will yell about the linking
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install cmake qt5 glew glm assimp bullet ninja; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mkdir build; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd build; fi
