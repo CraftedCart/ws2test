@@ -13,7 +13,7 @@ before_install:
 
 script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker run --name ws2 ws2; fi
-  - mkdir -p $TRAVIS_BUILD_DIR/ws2install
+  - mkdir -p $TRAVIS_BUILD_DIR/ws2install/deploy
 
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export CC=clang; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export CXX=clang++; fi
@@ -39,8 +39,8 @@ before_deploy:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker cp ws2:/app/build/install $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2; fi
 
   - cd $TRAVIS_BUILD_DIR/ws2install
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar zcvf smblevelworkshop2.tar.gz --owner=0 --group=0 smblevelworkshop2; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then zip -r smblevelworkshop2.zip smblevelworkshop2; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar zcvf deploy/smblevelworkshop2.tar.gz --owner=0 --group=0 smblevelworkshop2; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then zip -r deploy/smblevelworkshop2.zip smblevelworkshop2; fi
   - cd $TRAVIS_BUILD_DIR
 
 deploy:
