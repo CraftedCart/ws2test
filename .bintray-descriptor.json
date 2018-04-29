@@ -19,7 +19,7 @@
     },
     "files":
         [
-            {"includePattern": "ws2install/smblevelworkshop2.tar.gz",  "uploadPattern": "smblevelworkshop2-bleedingedge/|||COMMIT|||/$1"}
+            {"includePattern": "ws2install/smblevelworkshop2.tar.gz",  "uploadPattern": "smblevelworkshop2-bleedingedge/|||COMMIT|||/smblevelworkshop2-bleedingedge-nodeps-linux-x86_64-|||commit|||.tar.gz"}
         ],
     "publish": true
 }
