@@ -1,0 +1,21 @@
+sudo: required
+language: cpp
+services:
+  - docker
+before_install:
+  - docker build -t ws2 .
+script:
+  - docker run --name ws2 ws2
+  - mkdir -p $TRAVIS_BUILD_DIR/ws2install
+before_deploy:
+  - sed -ie "s/|||COMMIT|||/${TRAVIS_COMMIT}/g" .bintray-descriptor.json
+  - docker cp ws2:/app/build/install $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2
+  - cd $TRAVIS_BUILD_DIR/ws2install
+  - tar zcvf smblevelworkshop2.tar.gz --owner=0 --group=0 smblevelworkshop2
+deploy:
+  skip-cleanup: true
+  provider: bintray
+  file: ".bintray-descriptor.json"
+  user: craftedcart
+  key:
+    secure: FVAAYOTu2AYuR+J7veZ+bpgv7ZO6uqdWE6sCVAyhLgUZWCU1hphbJbIsf0UHTci0lIivTunnnmUKYLBi9K6iFLVE9Genb5Bxd1a8ZXxhFE3bU/rWlz6y6fVPNFiqOWDgJCnqkTLpnaZslP+xADsbwsKKemikPp9M+W9IM2E/TGWz2j/E6m12fvyOS8QpbycPqVsNjS46UfWfzN2eOYtxlxhooIpfUIiOzNE96wJwAq7DHTW/3pBSuN7mviLymUeD7rsg4FkaqzGoEe2BPV3NUd4qNrk/4epeW3AnPZyvzkECrPlNwgrrU0szmVfDTSGT14P1UdlWXWBMdrD+ty9mggYeXbe6/cdpMynjmRI/UO0XjNU7R7u9TCQDpnAQ79Lks82+KD5kp+npUoREUd1ljkjX9j78YB6+H3+HqM7rz4HzTMnnzTrIU6tdtrzK6eJ/ouGezIEautnPfQ4f9s0qdy7R0wIo+zdP5aeb1Y+M1gKP6OxC2/OQy52Jc2ce0Gg0dCBhx/jD2/tO9xiTCIwdGkhm9SrlcQ/jDEvAvUO9kcPHs1BZ7kdCuLBBU7wyzQ+0RIzAt2oIhRNW+kBCOJXfBGr/EDliutPT1bK5WDEYnXsNlm7N77VUV8cjAR3gD3VRbg5Nr/VEAfYOmAc4E4kKxeP043Dl7OgOEe1fGy+eJ6w=
