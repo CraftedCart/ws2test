@@ -33,6 +33,8 @@ before_deploy:
   - sed -ie "s/|||COMMIT|||/${TRAVIS_COMMIT}/g" .bintray-descriptor.json
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sed -ie "s/|||ARCH|||/linux-x86_64/g" .bintray-descriptor.json; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sed -ie "s/|||ARCH|||/macos-x86_64/g" .bintray-descriptor.json; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sed -ie "s/|||EXT|||/tar.gz/g" .bintray-descriptor.json; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sed -ie "s/|||EXT|||/zip/g" .bintray-descriptor.json; fi
 
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker cp ws2:/app/build/install $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2; fi
 
