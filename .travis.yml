@@ -7,11 +7,11 @@ before_install:
 script:
   - docker run --name ws2 ws2
   - mkdir -p $TRAVIS_BUILD_DIR/ws2install
+before_deploy:
+  - sed -ie "s/|||COMMIT|||/${TRAVIS_COMMIT}/g" .bintray-descriptor.json
   - docker cp ws2:/app/build/install $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2
   - cd $TRAVIS_BUILD_DIR/ws2install
   - tar zcvf smblevelworkshop2.tar.gz --owner=0 --group=0 smblevelworkshop2
-before_deploy:
-  - sed -ie "s/|||COMMIT|||/${TRAVIS_COMMIT}/g" .bintray-descriptor.json
 deploy:
   skip-cleanup: true
   provider: bintray
