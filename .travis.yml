@@ -6,7 +6,7 @@ before_install:
   - docker build -t ws2 .
 script:
   - docker run --name ws2 ws2
-  - mkdir -p $TRAVIS_BUILD_BIR/ws2install
+  - mkdir -p $TRAVIS_BUILD_DIR/ws2install
   - docker cp ws2:/app/build/install $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2
   - cd $TRAVIS_BUILD_DIR/ws2install
   - tar zcvf smblevelworkshop2.tar.gz --owner=0 --group=0 smblevelworkshop2
