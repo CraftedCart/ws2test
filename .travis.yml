@@ -27,6 +27,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ninja; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ninja install; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r install $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd $TRAVIS_BUILD_DIR; fi
 
 before_deploy:
   - sed -ie "s/|||COMMIT|||/${TRAVIS_COMMIT}/g" .bintray-descriptor.json
