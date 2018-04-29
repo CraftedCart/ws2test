@@ -19,7 +19,7 @@
     },
     "files":
         [
-            {"includePattern": "ws2install/.*",  "uploadPattern": "smblevelworkshop2-bleedingedge/|||COMMIT|||/smblevelworkshop2-bleedingedge-nodeps-|||ARCH|||-|||COMMIT|||.|||EXT|||"}
+            {"includePattern": "ws2install/(.*)",  "uploadPattern": "smblevelworkshop2-bleedingedge/|||COMMIT|||/smblevelworkshop2-bleedingedge-nodeps-|||ARCH|||-|||COMMIT|||.|||EXT|||"}
         ],
     "publish": true
 }
