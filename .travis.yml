@@ -5,5 +5,7 @@ services:
 before_install:
   - docker build -t ws2 .
 script:
-  - docker run ws2
+  - docker run --name ws2 ws2
+  - docker cp ws2:/app/build/install $TRAVIS_BUILD_DIR/ws2install
+  - ls -lah $TRAVIS_BUILD_DIR/ws2install
 
