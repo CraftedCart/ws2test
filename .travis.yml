@@ -40,7 +40,7 @@ before_deploy:
 
   - cd $TRAVIS_BUILD_DIR/ws2install
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar zcvf smblevelworkshop2.tar.gz --owner=0 --group=0 smblevelworkshop2; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then zip smblevelworkshop2.zip smblevelworkshop2; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then zip -r smblevelworkshop2.zip smblevelworkshop2; fi
   - cd $TRAVIS_BUILD_DIR
 
 deploy:
