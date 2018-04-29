@@ -8,10 +8,6 @@ os:
 services:
   - docker
 
-env:
-  - CC=clang
-  - CXX=clang++
-
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; docker build -t ws2 .
 
@@ -19,6 +15,8 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; docker run --name ws2 ws2; fi
   - mkdir -p $TRAVIS_BUILD_DIR/ws2install
 
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; export CC=clang; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; export CXX=clang++; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; brew update; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; brew install cmake qt5 glew glm assimp bullet ninja; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; mkdir build; fi
