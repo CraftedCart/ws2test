@@ -37,8 +37,8 @@ before_deploy:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker cp ws2:/app/build/install $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2; fi
 
   - cd $TRAVIS_BUILD_DIR/ws2install
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; tar zcvf smblevelworkshop2.tar.gz --owner=0 --group=0 smblevelworkshop2; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; zip smblevelworkshop2.zip smblevelworkshop2; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar zcvf smblevelworkshop2.tar.gz --owner=0 --group=0 smblevelworkshop2; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then zip smblevelworkshop2.zip smblevelworkshop2; fi
   - cd $TRAVIS_BUILD_DIR
 
 deploy:
