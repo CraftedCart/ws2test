@@ -37,7 +37,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd installwithdeps/ws2editor.app/Contents/MacOS; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ln -s ../Resources/bin/* .; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd ../../..; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then macdeployqt ws2editor.app; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then /usr/local/opt/qt5/bin/macdeployqt ws2editor.app; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd ..; fi
 
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r installnodeps $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2-nodeps; fi
