@@ -31,6 +31,7 @@ script:
 
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ninja package; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then hdiutil attach smblevelworkshop2*-Darwin.dmg; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mkdir installwithdeps; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r /Volumes/smblevelworkshop2*-Darwin/ws2editor.app installwithdeps/ws2editor.app; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mkdir installwithdeps/ws2editor.app/Contents/MacOS; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd installwithdeps/ws2editor.app/Contents/MacOS; fi
