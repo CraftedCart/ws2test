@@ -49,8 +49,8 @@ before_deploy:
   - cd $TRAVIS_BUILD_DIR/ws2install
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar zcvf deploy/smblevelworkshop2-bleedingedge-nodeps.tar.gz --owner=0 --group=0 smblevelworkshop2-nodeps; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar zcvf deploy/smblevelworkshop2-bleedingedge-withdeps.tar.gz --owner=0 --group=0 smblevelworkshop2-withdeps; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then zip -r deploy/smblevelworkshop2-bleedingedge-nodeps.zip smblevelworkshop2-nodeps; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then zip -r deploy/smblevelworkshop2-bleedingedge-withdeps.zip smblevelworkshop2-withdeps; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then tar zcvf deploy/smblevelworkshop2-bleedingedge-nodeps.tar.gz smblevelworkshop2-nodeps; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then tar zcvf deploy/smblevelworkshop2-bleedingedge-withdeps.tar.gz smblevelworkshop2-withdeps; fi
   - cd $TRAVIS_BUILD_DIR
 
 deploy:
