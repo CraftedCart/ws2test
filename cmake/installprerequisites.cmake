@@ -19,9 +19,18 @@ foreach(installedFile ${INSTALL_FILES})
 
     #Resolve symlinks
     set(resolvedFiles "")
+    set(origFiles "")
     foreach(file ${WS2EDITOR_PREREQS})
+        #Drop paths w/ "@rpath" (A macOS thing)
+        #I can't be bothered to resolve them and most of the time it shouldn't matter
+        if(${file} MATCHES "^@rpath.*")
+            message(STATUS "Dropping file " ${file})
+            continue()
+        endif()
+
         get_filename_component(resolvedFile "${file}" REALPATH)
         list(APPEND resolvedFiles "${resolvedFile}")
+        list(APPEND origFiles "${file}")
     endforeach(file)
 
     message(STATUS "Installing prerequisites for " ${installedFile})
@@ -29,7 +38,7 @@ foreach(installedFile ${INSTALL_FILES})
     #Copy non-symlinked files
     file(COPY ${resolvedFiles} DESTINATION ${LIBPATH})
     #Also copy the symlinks (The original files)
-    file(COPY ${WS2EDITOR_PREREQS} DESTINATION ${LIBPATH})
+    file(COPY ${origFiles} DESTINATION ${LIBPATH})
 endforeach(installedFile)
 
 #Also fetch the Qt platform plugins

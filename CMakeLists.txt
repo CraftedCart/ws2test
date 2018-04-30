@@ -5,7 +5,11 @@ project(smblevelworkshop2)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib:$ORIGIN")
+if(APPLE)
+    set(CMAKE_INSTALL_RPATH "@loader_path/../lib;@loader_path")
+else(APPLE)
+    set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib:$ORIGIN")
+endif(APPLE)
 
 #Add uninstall target
 configure_file("cmake/uninstall.cmake" "cmake/uninstall.cmake" COPYONLY)
