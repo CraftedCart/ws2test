@@ -18,7 +18,7 @@
         "desc": "Bleeding edge build from GitHub commit |||COMMIT|||"
     },
     "files": [
-        {"includePattern": "ws2install/deploy/(.*).tar.gz",  "uploadPattern": "smblevelworkshop2-bleedingedge/|||COMMIT|||/$1-|||ARCH|||-|||COMMIT|||.|||EXT|||"}
+        {"includePattern": "ws2install/deploy/(.*).tar.gz",  "uploadPattern": "smblevelworkshop2-bleedingedge/|||COMMIT|||/$1-|||ARCH|||-|||COMMIT|||.|||EXT|||"},
         {"includePattern": "ws2install/deploy/(.*).zip",  "uploadPattern": "smblevelworkshop2-bleedingedge/|||COMMIT|||/$1-|||ARCH|||-|||COMMIT|||.|||EXT|||"}
     ],
     "publish": true
