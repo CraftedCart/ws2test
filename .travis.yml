@@ -23,10 +23,17 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install cmake qt5 glew glm assimp bullet ninja; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mkdir build; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd build; fi
+
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cmake -DCMAKE_BUILD_TYPE="RelWithDebInfo" -DCMAKE_INSTALL_PREFIX="install" -G "Ninja" ..; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ninja; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ninja install; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r install $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r install installnodeps; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ninja installprerequisites; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r install installwithdeps; fi
+
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r installnodeps $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2-nodeps; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r installwithdeps $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2-withdeps; fi
+
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd $TRAVIS_BUILD_DIR; fi
 
 before_deploy:
@@ -36,11 +43,14 @@ before_deploy:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sed -ie "s/|||EXT|||/tar.gz/g" .bintray-descriptor.json; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sed -ie "s/|||EXT|||/zip/g" .bintray-descriptor.json; fi
 
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker cp ws2:/app/build/install $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker cp ws2:/app/build/installnodeps $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2-nodeps; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker cp ws2:/app/build/installwithdeps $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2-withdeps; fi
 
   - cd $TRAVIS_BUILD_DIR/ws2install
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar zcvf deploy/smblevelworkshop2.tar.gz --owner=0 --group=0 smblevelworkshop2; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then zip -r deploy/smblevelworkshop2.zip smblevelworkshop2; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar zcvf deploy/smblevelworkshop2-bleedingedge-nodeps.tar.gz --owner=0 --group=0 smblevelworkshop2-nodeps; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar zcvf deploy/smblevelworkshop2-bleedingedge-withdeps.tar.gz --owner=0 --group=0 smblevelworkshop2-withdeps; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then zip -r deploy/smblevelworkshop2-bleedingedge-nodeps.zip smblevelworkshop2-nodeps; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then zip -r deploy/smblevelworkshop2-bleedingedge-withdeps.zip smblevelworkshop2-withdeps; fi
   - cd $TRAVIS_BUILD_DIR
 
 deploy:

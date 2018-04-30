@@ -16,5 +16,5 @@ ENV CC clang
 ENV CXX clang++
 
 #Start the build when the container launches
-CMD mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE="RelWithDebInfo" -DCMAKE_INSTALL_PREFIX="install" -G "Ninja" .. && ninja && ninja install
+CMD mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE="RelWithDebInfo" -DCMAKE_INSTALL_PREFIX="install" -G "Ninja" .. && ninja && ninja install && cp -r install installnodeps && ninja installprerequisites && cp -r install installwithdeps
 
