@@ -40,8 +40,8 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then /usr/local/opt/qt5/bin/macdeployqt ws2editor.app; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd ..; fi
 
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r installnodeps $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2-nodeps; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r installwithdeps $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2-withdeps; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -RH installnodeps $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2-nodeps; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -RH installwithdeps $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2-withdeps; fi
 
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd $TRAVIS_BUILD_DIR; fi
 
