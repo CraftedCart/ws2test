@@ -44,3 +44,11 @@ add_subdirectory(./ws2lz)
 add_subdirectory(./ws2lzfrontend)
 add_subdirectory(./ws2editor)
 
+if(APPLE)
+    set(CPACK_GENERATOR Bundle)
+    set(CPACK_BUNDLE_NAME "ws2editor")
+    set(CPACK_BUNDLE_PLIST ${CMAKE_SOURCE_DIR}/ws2editor/resources/Raw/Info.plist)
+    set(CPACK_BUNDLE_ICON ${CMAKE_SOURCE_DIR}/ws2editor/resources/Raw/ws2editor.icns)
+endif(APPLE)
+include(CPack)
+

@@ -28,8 +28,16 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ninja; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ninja install; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r install installnodeps; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ninja installprerequisites; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r install installwithdeps; fi
+
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ninja package; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then hdiutil attach smblevelworkshop2*-Darwin.dmg; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r /Volumes/smblevelworkshop2*-Darwin/ws2editor.app installwithdeps; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mkdir installwithdeps/ws2editor.app/Contents/MacOS; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd installwithdeps/ws2editor.app/Contents/MacOS; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ln -s ../Resources/bin/* .; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd ../../..; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then macdeployqt ws2editor.app; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd ..; fi
 
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r installnodeps $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2-nodeps; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cp -r installwithdeps $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2-withdeps; fi
@@ -40,8 +48,6 @@ before_deploy:
   - sed -ie "s/|||COMMIT|||/${TRAVIS_COMMIT}/g" .bintray-descriptor.json
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sed -ie "s/|||ARCH|||/linux-x86_64/g" .bintray-descriptor.json; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sed -ie "s/|||ARCH|||/macos-x86_64/g" .bintray-descriptor.json; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sed -ie "s/|||EXT|||/tar.gz/g" .bintray-descriptor.json; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sed -ie "s/|||EXT|||/zip/g" .bintray-descriptor.json; fi
 
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker cp ws2:/app/build/installnodeps $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2-nodeps; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker cp ws2:/app/build/installwithdeps $TRAVIS_BUILD_DIR/ws2install/smblevelworkshop2-withdeps; fi
