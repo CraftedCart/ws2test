@@ -15,13 +15,5 @@ build_script:
   - bash -lc "pacman -S --noconfirm mingw-w64-x86_64-cmake make mingw-w64-x86_64-gcc mingw-w64-x86_64-qt5 mingw-w64-x86_64-glew mingw-w64-x86_64-glm mingw-w64-x86_64-assimp mingw-w64-x86_64-bullet mingw-w64-x86_64-ninja"
 
     #Build
-  - |
-    bash -lc "
-    export PATH=/mingw64/bin:$PATH
-    mkdir build
-    cd build
-    /mingw64/bin/cmake -G 'MSYS Makefiles' -DCMAKE_INSTALL_PREFIX='install' -DCMAKE_BUILD_TYPE='RelWithDebInfo' -G 'Ninja' ..
-    ninja
-    ninja install
-    "
+  - bash -lc "export PATH=/mingw64/bin:$PATH && mkdir build && cd build && /mingw64/bin/cmake -G \"MSYS Makefiles\" -DCMAKE_INSTALL_PREFIX=\"install\" -DCMAKE_BUILD_TYPE=\"RelWithDebInfo\" -G \"Ninja\" .. && ninja && ninja install"
 
