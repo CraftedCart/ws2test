@@ -15,5 +15,28 @@ build_script:
   - bash -lc "pacman -S --noconfirm mingw-w64-x86_64-cmake make mingw-w64-x86_64-clang mingw-w64-x86_64-qt5 mingw-w64-x86_64-glew mingw-w64-x86_64-glm mingw-w64-x86_64-assimp mingw-w64-x86_64-bullet mingw-w64-x86_64-ninja"
 
     #Build and install
-  - bash -lc "export PATH=/mingw64/bin:$PATH && export CC=clang && export CXX=clang++ && cd \"$APPVEYOR_BUILD_FOLDER\" && mkdir build && cd build && cmake -G \"Ninja\" -DCMAKE_INSTALL_PREFIX=\"install\" -DCMAKE_BUILD_TYPE=\"RelWithDebInfo\" .. && ninja && ninja install && cp -r install installnodeps && ninja installprerequisites && cp -r install installwithdeps"
+  - bash -lc "mkdir \"$APPVEYOR_BUILD_FOLDER/ws2install\""
+  - bash -lc "export PATH=/mingw64/bin:$PATH && export CC=clang && export CXX=clang++ && cd \"$APPVEYOR_BUILD_FOLDER\" && mkdir build && cd build && cmake -G \"Ninja\" -DCMAKE_INSTALL_PREFIX=\"install\" -DCMAKE_BUILD_TYPE=\"RelWithDebInfo\" .. && ninja && ninja install && cp -r install installnodeps && ninja installprerequisites && cp -r install installwithdeps && cp -RH installnodeps \"$APPVEYOR_BUILD_FOLDER/wsinstall/smblevelworkshop2-nodeps\" && cp -RH installwithdeps \"$APPVEYOR_BUILD_FOLDER/wsinstall/smblevelworkshop2-withdeps\""
+
+before_deploy:
+  - PATH C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%
+
+  - bash -lc "deploy"
+  - ps: "Compress-Archive -Path smblevelworkshop2-nodeps -DestinationPath deploy\\smblevelworkshop2-bleedingedge-nodeps-x86_64-$env:APPVEYOR_REPO_COMMIT.zip"
+  - ps: "Compress-Archive -Path smblevelworkshop2-withdeps -DestinationPath deploy\\smblevelworkshop2-bleedingedge-withdeps-x86_64-$env:APPVEYOR_REPO_COMMIT.zip"
+
+artifacts:
+  - "deploy\\smblevelworkshop2-bleedingedge-nodeps-x86_64-$env:APPVEYOR_REPO_COMMIT.zip"
+  - "deploy\\smblevelworkshop2-bleedingedge-withdeps-x86_64-$env:APPVEYOR_REPO_COMMIT.zip"
+
+deploy:
+  - provider: BinTray
+    username: craftedcart
+    api_key:
+      secure: DPSKtQQggDgMOwGEMlBxXQOjxRBcFoNR6VFDppGfdiBra+4+3xC7U3hwwbmTSvzU
+    subject: craftedcart
+    repo: the-workshop
+    package: smblevelworkshop2-bleedingedge
+    version: $(APPVEYOR_REPO_COMMIT)
+    publish: true
 

@@ -1,28 +1,28 @@
 include(GetPrerequisites)
 
 function(resolve_windows_prereqs var)
-	#Darn it I have to resolve Windows paths myself
-	if(WIN32)
-		set(temp ${WS2EDITOR_PREREQS})
-		set(newList "")
+    #Darn it I have to resolve Windows paths myself
+    if(WIN32)
+        set(temp ${WS2EDITOR_PREREQS})
+        set(newList "")
 
-		foreach(file ${temp})
-			#Iterate over PATH to try and find it
-			foreach(pth $ENV{PATH})
-				if("${pth}" MATCHES ".*System32.*")
-					#Drop System32 paths
-					continue()
-				endif()
+        foreach(file ${temp})
+            #Iterate over PATH to try and find it
+            foreach(pth $ENV{PATH})
+                if("${pth}" MATCHES ".*System32.*")
+                    #Drop System32 paths
+                    continue()
+                endif()
 
-				if(EXISTS "${pth}/${file}")
-					list(APPEND newList "${pth}/${file}")
-				endif()
-			endforeach(pth)
-		endforeach(file)
+                if(EXISTS "${pth}/${file}")
+                    list(APPEND newList "${pth}/${file}")
+                endif()
+            endforeach(pth)
+        endforeach(file)
 
-		unset(temp)
-		set(${var} ${newList} PARENT_SCOPE)
-	endif()
+        unset(temp)
+        set(${var} ${newList} PARENT_SCOPE)
+    endif()
 endfunction(resolve_windows_prereqs)
 
 if(WIN32)
@@ -41,7 +41,7 @@ foreach(installedFile ${INSTALL_FILES})
     endif(IS_DIRECTORY ${installedFile})
 
     get_prerequisites(${installedFile} WS2EDITOR_PREREQS 0 1 "" "")
-	resolve_windows_prereqs(WS2EDITOR_PREREQS)
+    resolve_windows_prereqs(WS2EDITOR_PREREQS)
 
     #Resolve symlinks
     set(resolvedFiles "")
@@ -77,7 +77,7 @@ foreach(plugin ${QT_PLATFORM_PLUGINS})
     file(COPY ${plugin} DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/platforms)
 
     get_prerequisites(${plugin} PLUGIN_PREREQS 0 1 "" "")
-	resolve_windows_prereqs(PLUGIN_PREREQS)
+    resolve_windows_prereqs(PLUGIN_PREREQS)
 
     #Resolve symlinks
     set(resolvedFiles "")
