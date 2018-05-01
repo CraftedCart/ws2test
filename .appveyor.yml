@@ -19,7 +19,7 @@ build_script:
     bash -lc "
     mkdir build
     cd build
-    cmake -G 'MSYS Makefiles' -DCMAKE_INSTALL_PREFIX='install' -DCMAKE_BUILD_TYPE='RelWithDebInfo' -G 'Ninja' ..
+    /mingw64/bin/cmake -G 'MSYS Makefiles' -DCMAKE_INSTALL_PREFIX='install' -DCMAKE_BUILD_TYPE='RelWithDebInfo' -G 'Ninja' ..
     ninja
     ninja install
     "
