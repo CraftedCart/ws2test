@@ -16,7 +16,9 @@ build_script:
 
     #Build and install
   - bash -lc "mkdir \"$APPVEYOR_BUILD_FOLDER/ws2install\""
-  - bash -lc "export PATH=/mingw64/bin:$PATH && export CC=clang && export CXX=clang++ && cd \"$APPVEYOR_BUILD_FOLDER\" && mkdir build && cd build && cmake -G \"Ninja\" -DCMAKE_INSTALL_PREFIX=\"install\" -DCMAKE_BUILD_TYPE=\"RelWithDebInfo\" .. && ninja && ninja install && cp -r install installnodeps && ninja installprerequisites && cp -r install installwithdeps && cp -RH installnodeps \"$APPVEYOR_BUILD_FOLDER/wsinstall/smblevelworkshop2-nodeps\" && cp -RH installwithdeps \"$APPVEYOR_BUILD_FOLDER/wsinstall/smblevelworkshop2-withdeps\""
+  - bash -lc "export PATH=/mingw64/bin:$PATH && export CC=clang && export CXX=clang++ && cd \"$APPVEYOR_BUILD_FOLDER\" && mkdir build && cd build && cmake -G \"Ninja\" -DCMAKE_INSTALL_PREFIX=\"install\" -DCMAKE_BUILD_TYPE=\"RelWithDebInfo\" .. && ninja && ninja install && cp -r install installnodeps && ninja installprerequisites && cp -r install installwithdeps"
+  - copy "build\\installnodeps" "\"$APPVEYOR_BUILD_FOLDER\\wsinstall\\smblevelworkshop2-nodeps\""
+  - copy "build\\installwithdeps" "\"$APPVEYOR_BUILD_FOLDER\\wsinstall\\smblevelworkshop2-withdeps\""
 
 before_deploy:
   - PATH C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%
