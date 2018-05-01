@@ -18,7 +18,6 @@ build_script:
   - |
     bash -lc "
     export PATH=/mingw64/bin:$PATH
-
     mkdir build
     cd build
     /mingw64/bin/cmake -G 'MSYS Makefiles' -DCMAKE_INSTALL_PREFIX='install' -DCMAKE_BUILD_TYPE='RelWithDebInfo' -G 'Ninja' ..
