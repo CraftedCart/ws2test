@@ -22,11 +22,11 @@ build_script:
 
     #Compress dirs to deployment
   - mkdir deploy
-  - 7z a -tzip deploy\smblevelworkshop2-bleeding-edge-nodeps-win-x86_64-%APPVEYOR_REPO_COMMIT%.zip ws2install\smblevelworkshop2-nodeps
-  - 7z a -tzip deploy\smblevelworkshop2-bleeding-edge-withdeps-win-x86_64-%APPVEYOR_REPO_COMMIT%.zip ws2install\smblevelworkshop2-withdeps
+  - 7z a -tzip deploy\smblevelworkshop2-bleeding-edge-nodeps-win-x86_64-%APPVEYOR_REPO_COMMIT%.zip ws2install\smblevelworkshop2-nodeps\
+  - 7z a -tzip deploy\smblevelworkshop2-bleeding-edge-withdeps-win-x86_64-%APPVEYOR_REPO_COMMIT%.zip ws2install\smblevelworkshop2-withdeps\
   - mkdir -p smblevelworkshop2-bleedingedge/%APPVEYOR_REPO_COMMIT%
   - mv *.zip smblevelworkshop2-bleedingedge/%APPVEYOR_REPO_COMMIT%
-  - 7z a -tzip deploy\combo.zip ws2install\smblevelworkshop2-bleedingedge
+  - 7z a -tzip deploy\combo.zip ws2install\smblevelworkshop2-bleedingedge\
 
 artifacts:
   - path: deploy\combo.zip
