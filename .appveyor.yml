@@ -20,12 +20,13 @@ build_script:
   - xcopy "%APPVEYOR_BUILD_FOLDER%\build\installnodeps" "%APPVEYOR_BUILD_FOLDER%\wsinstall\smblevelworkshop2-nodeps" /s/h/e/k/f/c/i
   - xcopy "%APPVEYOR_BUILD_FOLDER%\build\installwithdeps" "%APPVEYOR_BUILD_FOLDER%\wsinstall\smblevelworkshop2-withdeps" /s/h/e/k/f/c/i
 
+    #Compress dirs to deployment
+  - ps: Compress-Archive -Path "$env:APPVEYOR_BUILD_FOLDER\wsinstall\smblevelworkshop2-nodeps" -DestinationPath "$env:APPVEYOR_BUILD_FOLDER\deploy\smblevelworkshop2-bleedingedge-nodeps-x86_64-$env:APPVEYOR_REPO_COMMIT.zip"
+  - ps: Compress-Archive -Path "$env:APPVEYOR_BUILD_FOLDER\wsinstall\smblevelworkshop2-withdeps" -DestinationPath "$env:APPVEYOR_BUILD_FOLDER\deploy\smblevelworkshop2-bleedingedge-withdeps-x86_64-$env:APPVEYOR_REPO_COMMIT.zip"
+
 before_deploy:
   - PATH C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%
 
-  - bash -lc "deploy"
-  - ps: "Compress-Archive -Path smblevelworkshop2-nodeps -DestinationPath deploy\\smblevelworkshop2-bleedingedge-nodeps-x86_64-$env:APPVEYOR_REPO_COMMIT.zip"
-  - ps: "Compress-Archive -Path smblevelworkshop2-withdeps -DestinationPath deploy\\smblevelworkshop2-bleedingedge-withdeps-x86_64-$env:APPVEYOR_REPO_COMMIT.zip"
 
 artifacts:
   - path: deploy\smblevelworkshop2-bleedingedge-nodeps-x86_64-$(APPVEYOR_REPO_COMMIT).zip
