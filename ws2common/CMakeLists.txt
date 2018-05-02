@@ -24,7 +24,8 @@ include_directories(SYSTEM ${GLM_INCLUDE_DIRS})
 find_package(assimp REQUIRED)
 include_directories(SYSTEM ${ASSIMP_INCLUDE_DIRS})
 if(APPLE) #For whatever reason ASSIMP_LIBRARIES does not use a full path on macOS
-    link_directories(${ASSIMP_LINK_DIRS})
+    #link_directories(${ASSIMP_LINK_DIRS})
+    set(ASSIMP_LIBRARIES /usr/local/lib/libassimp.dylib)
 endif(APPLE)
 
 include_directories(./include)
