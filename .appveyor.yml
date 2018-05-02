@@ -21,19 +21,16 @@ build_script:
   - xcopy "%APPVEYOR_BUILD_FOLDER%\build\installwithdeps" "%APPVEYOR_BUILD_FOLDER%\wsinstall\smblevelworkshop2-withdeps" /s/h/e/k/f/c/i
 
     #Compress dirs to deployment
-  - ps: mkdir "$env:APPVEYOR_BUILD_FOLDER\deploy"
-  - ps: Compress-Archive -Path "$env:APPVEYOR_BUILD_FOLDER\wsinstall\smblevelworkshop2-nodeps" -DestinationPath "$env:APPVEYOR_BUILD_FOLDER\deploy\smblevelworkshop2-bleedingedge-nodeps-x86_64-$env:APPVEYOR_REPO_COMMIT.zip"
-  - ps: Compress-Archive -Path "$env:APPVEYOR_BUILD_FOLDER\wsinstall\smblevelworkshop2-withdeps" -DestinationPath "$env:APPVEYOR_BUILD_FOLDER\deploy\smblevelworkshop2-bleedingedge-withdeps-x86_64-$env:APPVEYOR_REPO_COMMIT.zip"
-
-before_deploy:
-  - PATH C:\%MSYS2_DIR%\%MSYSTEM%\bin;C:\%MSYS2_DIR%\usr\bin;%PATH%
-
+  - mkdir deploy
+  - 7z a -tzip deploy\smblevelworkshop2-bleeding-edge-nodeps-win-x86_64-%APPVEYOR_REPO_COMMIT%.zip ws2install\smblevelworkshop2-nodeps
+  - 7z a -tzip deploy\smblevelworkshop2-bleeding-edge-withdeps-win-x86_64-%APPVEYOR_REPO_COMMIT%.zip ws2install\smblevelworkshop2-withdeps
+  - mkdir -p smblevelworkshop2-bleedingedge/%APPVEYOR_REPO_COMMIT%
+  - mv *.zip smblevelworkshop2-bleedingedge/%APPVEYOR_REPO_COMMIT%
+  - 7z a -tzip deploy\combo.zip ws2install\smblevelworkshop2-bleedingedge
 
 artifacts:
-  - path: deploy\smblevelworkshop2-bleedingedge-nodeps-x86_64-$(APPVEYOR_REPO_COMMIT).zip
-    name: $(APPVEYOR_REPO_COMMIT)/smblevelworkshop2-bleedingedge-nodeps-x86_64-$(APPVEYOR_REPO_COMMIT).zip
-  - path: deploy\smblevelworkshop2-bleedingedge-withdeps-x86_64-$(APPVEYOR_REPO_COMMIT).zip
-    name: $(APPVEYOR_REPO_COMMIT)/smblevelworkshop2-bleedingedge-withdeps-x86_64-$(APPVEYOR_REPO_COMMIT).zip
+  - path: deploy\combo.zip
+    name: combo
 
 deploy:
   - provider: BinTray
@@ -45,4 +42,5 @@ deploy:
     package: smblevelworkshop2-bleedingedge
     version: $(APPVEYOR_REPO_COMMIT)
     publish: true
+    explode: true
 
