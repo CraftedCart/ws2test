@@ -27,7 +27,7 @@ build_script:
   - 7z a -tzip -mx9 ..\deploy\smblevelworkshop2-bleeding-edge-withdeps-win-x86_64-%APPVEYOR_REPO_COMMIT%.zip smblevelworkshop2-withdeps
   - cd ..
   - mkdir smblevelworkshop2-bleedingedge\%APPVEYOR_REPO_COMMIT%
-  - mv *.zip smblevelworkshop2-bleedingedge\%APPVEYOR_REPO_COMMIT%
+  - bash -lc "mv deploy/*.zip smblevelworkshop2-bleedingedge/$APPVEYOR_REPO_COMMIT"
   - 7z a -tzip -mx9 deploy\combo.zip smblevelworkshop2-bleedingedge
 
 artifacts:
