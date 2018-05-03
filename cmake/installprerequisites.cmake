@@ -9,7 +9,8 @@ function(resolve_windows_prereqs var)
         foreach(file ${temp})
             #Iterate over PATH to try and find it
             foreach(pth $ENV{PATH})
-                if("${pth}" MATCHES ".*System32.*")
+                string(TOLOWER pth lowerPth)
+                if("${lowerPth}" MATCHES ".*System32.*")
                     #Drop System32 paths
                     continue()
                 endif()
