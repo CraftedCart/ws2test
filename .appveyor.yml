@@ -36,6 +36,8 @@ artifacts:
 
 deploy:
   - provider: BinTray
+    on:
+      branch: master
     username: craftedcart
     api_key:
       secure: DPSKtQQggDgMOwGEMlBxXQOjxRBcFoNR6VFDppGfdiBra+4+3xC7U3hwwbmTSvzU
