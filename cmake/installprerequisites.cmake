@@ -9,11 +9,16 @@ function(resolve_windows_prereqs var)
         foreach(file ${temp})
             #Iterate over PATH to try and find it
             foreach(pth $ENV{PATH})
+                #Drop System32/PowerShell/LLVM paths
+                #Also "OR" doesn't seem to want to work for me
                 string(TOLOWER pth lowerPth)
-                if(("${lowerPth}" MATCHES ".*system32.*") OR
-                        ("${lowerPth}" MATCHES ".*powershell.*") OR
-                        ("${lowerPth}" MATCHES ".*llvm.*"))
-                    #Drop System32/PowerShell/LLVM paths
+                if("${lowerPth}" MATCHES ".*system32.*")
+                    continue()
+                endif()
+                if("${lowerPth}" MATCHES ".*powershell.*")
+                    continue()
+                endif()
+                if("${lowerPth}" MATCHES ".*llvm.*")
                     continue()
                 endif()
 
