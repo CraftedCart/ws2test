@@ -1,6 +1,6 @@
 {
     "package": {
-        "name": "smblevelworkshop2-bleedingedge",
+        "name": "smblevelworkshop2-develop",
         "repo": "the-workshop",
         "subject": "craftedcart",
         "desc": "Automatic uploads are pushed here from Travis CI, taken from the GitHub repo",
@@ -15,10 +15,10 @@
     },
     "version": {
         "name": "|||COMMIT|||",
-        "desc": "Bleeding edge build from GitHub commit |||COMMIT|||"
+        "desc": "Bleeding edge development build from GitHub commit |||COMMIT|||"
     },
     "files": [
-        {"includePattern": "ws2install/deploy/(.*).tar.gz",  "uploadPattern": "smblevelworkshop2-bleedingedge/|||COMMIT|||/$1-|||ARCH|||-|||COMMIT|||.tar.gz"}
+        {"includePattern": "ws2install/deploy/(.*).tar.gz",  "uploadPattern": "smblevelworkshop2-develop/|||COMMIT|||/$1-|||ARCH|||-|||COMMIT|||.tar.gz"}
     ],
     "publish": true
 }

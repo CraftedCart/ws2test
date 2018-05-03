@@ -23,12 +23,12 @@ build_script:
     #Compress dirs to deployment
   - mkdir deploy
   - cd ws2install
-  - 7z a -tzip -mx9 ..\deploy\smblevelworkshop2-bleedingedge-nodeps-win-x86_64-%APPVEYOR_REPO_COMMIT%.zip smblevelworkshop2-nodeps
-  - 7z a -tzip -mx9 ..\deploy\smblevelworkshop2-bleedingedge-withdeps-win-x86_64-%APPVEYOR_REPO_COMMIT%.zip smblevelworkshop2-withdeps
+  - 7z a -tzip -mx9 ..\deploy\smblevelworkshop2-develop-nodeps-win-x86_64-%APPVEYOR_REPO_COMMIT%.zip smblevelworkshop2-nodeps
+  - 7z a -tzip -mx9 ..\deploy\smblevelworkshop2-develop-withdeps-win-x86_64-%APPVEYOR_REPO_COMMIT%.zip smblevelworkshop2-withdeps
   - cd ..
-  - mkdir smblevelworkshop2-bleedingedge\%APPVEYOR_REPO_COMMIT%
-  - move %APPVEYOR_BUILD_FOLDER%\deploy\* %APPVEYOR_BUILD_FOLDER%\smblevelworkshop2-bleedingedge\%APPVEYOR_REPO_COMMIT%
-  - 7z a -tzip -mx9 deploy\combo.zip smblevelworkshop2-bleedingedge
+  - mkdir smblevelworkshop2-develop\%APPVEYOR_REPO_COMMIT%
+  - move %APPVEYOR_BUILD_FOLDER%\deploy\* %APPVEYOR_BUILD_FOLDER%\smblevelworkshop2-develop\%APPVEYOR_REPO_COMMIT%
+  - 7z a -tzip -mx9 deploy\combo.zip smblevelworkshop2-develop
 
 artifacts:
   - path: deploy\combo.zip
@@ -43,7 +43,7 @@ deploy:
       secure: DPSKtQQggDgMOwGEMlBxXQOjxRBcFoNR6VFDppGfdiBra+4+3xC7U3hwwbmTSvzU
     subject: craftedcart
     repo: the-workshop
-    package: smblevelworkshop2-bleedingedge
+    package: smblevelworkshop2-develop
     version: $(APPVEYOR_REPO_COMMIT)
     publish: true
     explode: true
