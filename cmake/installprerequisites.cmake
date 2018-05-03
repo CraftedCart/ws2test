@@ -10,8 +10,10 @@ function(resolve_windows_prereqs var)
             #Iterate over PATH to try and find it
             foreach(pth $ENV{PATH})
                 string(TOLOWER pth lowerPth)
-                if("${lowerPth}" MATCHES ".*system32.*")
-                    #Drop System32 paths
+                if("${lowerPth}" MATCHES ".*system32.*" OR
+                        "${lowerPth}" MATCHES ".*powershell.*" OR
+                        "${lowerPth}" MATCHES ".*llvm.*")
+                    #Drop System32/PowerShell/LLVM paths
                     continue()
                 endif()
 
