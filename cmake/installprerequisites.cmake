@@ -19,7 +19,6 @@ function(resolve_windows_prereqs var)
 
                 if(EXISTS "${pth}/${file}")
                     list(APPEND newList "${pth}/${file}")
-                    message(STATUS "PAAAAAAATH ${pth}/${file}")
                 endif()
             endforeach(pth)
         endforeach(file)
